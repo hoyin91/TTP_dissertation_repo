@@ -65,10 +65,10 @@ public class Driver {
         	//args = new String[]{"instances70", "",
             "20", "10000", (600*1000)+""};//10mins, algorithm number 24 is algorithm S5 (best performing) from the GECCO 2015 article          last number: seed
         	//"8", "5", "60000"};//1min
-        /*for(int i = 0;i<30;i++) {
+        for(int i = 0;i<30;i++) {
             doBatch(args);
-        }*/
-        tour_opt.opt_tour();
+        }
+        //tour_opt.opt_tour();
         /*String[] args1 = new String[]{"instances","rat195_n1940_uncorr_03.ttp", "21", "10000", (600*1000)+""};
         for(int i = 0;i<30;i++) {
             doBatch(args1);
@@ -114,7 +114,10 @@ public class Driver {
 
             
 //            TTPSolution newSolution = null;
-            TTPSolution newSolution = new TTPSolution(Optimisation.linkernTour(instance.file.getPath(), instance.numberOfNodes+1), new int[instance.numberOfItems]);
+
+            int[] tspTour = Optimisation.linkernTour(instance.file.getPath(), instance.numberOfNodes+1);
+            TTPSolution newSolution = new TTPSolution(tspTour, new int[instance.numberOfItems]);
+            //TTPSolution newSolution = new TTPSolution(Optimisation.linkernTour(instance.file.getPath(), instance.numberOfNodes+1), new int[instance.numberOfItems]);
             instance.evaluate(newSolution, false);
         
             
