@@ -38,4 +38,17 @@ public class tour_opt{
         System.out.println("Resulting tour node count: " + result.size());
 
     }
+
+    public static int []match(int [] lin_tour)
+    {
+        int [] tour = lin_tour;
+
+        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rl11849.tsp")); //alter file name here.
+        ArrayList<Point2D> nearestN;
+        ArrayList<Point2D> result;
+
+
+        return tour;
+    }
+
 }

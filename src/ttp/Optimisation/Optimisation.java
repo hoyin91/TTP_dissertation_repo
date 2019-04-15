@@ -16,6 +16,7 @@ import ttp.Utils.DeepCopy;
 import ttp.Utils.readTours;
 import ttp.newrep.City;
 import ttp.newrep.Individual;
+import tour_opt.tour_opt;
 
 /**
  *
@@ -826,7 +827,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 //    }
     
     public static int[] linkernTour(String tourFileName, int numNodes) {
-    	System.out.println("CALLED LINKERN FUNCT");
+    	//System.out.println("CALLED LINKERN FUNCT");
         int[] result = new int[numNodes];
         
         boolean debugPrint = false;
@@ -1029,14 +1030,14 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
     ///////////////////////////////////////////////////////
     // HEURISTIC TESTER
     ///////////////////////////////////////////////////////
-    public static TTPSolution HT(TTPInstance instance, long maxRunTime, boolean runOnce) {
+    public static TTPSolution 	HT(TTPInstance instance, long maxRunTime, boolean runOnce) {
     	ttp.Utils.Utils.startTiming();
     	long startTime = System.currentTimeMillis();
     	long elapsedTime = 0;
     	TTPSolution bestSol = null;
     	double bestObj = Double.NEGATIVE_INFINITY;
         
-        boolean debugPrint = !true;
+        boolean debugPrint = true;
 
         List<Double> objValHist = new ArrayList<Double>();
         List<int[]> tours2 = new ArrayList<int[]>();
@@ -1128,6 +1129,19 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
             	result=bestSol;
             }
     	}
+    	boolean exit_loop = false;
+    	while(exit_loop)
+        {
+            boolean regen_tour = false;
+
+            int [] lin_tour = tour_opt.match(tours2.get(0));
+
+
+
+            if(regen_tour) {
+                exit_loop = false;
+            }
+        }
     	if (debugPrint) System.out.println("------------------------------------------------");
     	for(int c = 0; c<heuristics.length; c++){
     		if (debugPrint) System.out.println("HEUR: "+heuristics[c]+"\t AVG: "+avgs[c]+"\t STD: "+stds[c]);

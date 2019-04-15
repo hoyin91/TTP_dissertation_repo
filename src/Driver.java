@@ -50,8 +50,8 @@ public class Driver {
 //                    "rat195_n1940_bounded-strongly-corr_03.ttp",
 //                    "a280_n1395_uncorr-similar-weights_05",
 //                    "u724_n2169_bounded-strongly-corr_07.ttp",
-                    //"rat195_n1940_uncorr_03.ttp",
-                        "pla33810_n169045_uncorr-similar-weights_05.ttp",
+                    "rat195_n1940_uncorr_03.ttp",
+                        //"pla33810_n169045_uncorr-similar-weights_05.ttp",
         	//args = new String[]{"instances", "a280_n1395_uncorr-similar-weights_05",
 //        	args = new String[]{"instances", "a280_n2790_uncorr_10",
 //        	args = new String[]{"instances", "rl5934_n59330_uncorr-similar-weights_07",//---
@@ -63,9 +63,9 @@ public class Driver {
             //args = new String[]{"instances", "kroA100_n990_bounded-strongly-corr_01",
         	//args = new String[]{"instances", "pla85900_n858990_bounded-strongly-corr_01",
         	//args = new String[]{"instances70", "",
-            "20", "10000", (600*1000)+""};//10mins, algorithm number 24 is algorithm S5 (best performing) from the GECCO 2015 article          last number: seed
+            "24", "10000", (600*1000)+""};//10mins, algorithm number 24 is algorithm S5 (best performing) from the GECCO 2015 article          last number: seed
         	//"8", "5", "60000"};//1min
-        for(int i = 0;i<30;i++) {
+        for(int i = 0;i<3;i++) {
             doBatch(args);
         }
         //tour_opt.opt_tour();
