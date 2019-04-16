@@ -117,6 +117,9 @@ public class TwoOpt {
         }
 
         Collections.shuffle(newTour);
+        int x = newTour.indexOf(cities.get(0));
+        newTour.set(x,newTour.get(size-1));
+        newTour.set((size-1),newTour.get(0));
 
         return newTour;
     }

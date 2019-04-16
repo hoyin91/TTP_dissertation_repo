@@ -1129,7 +1129,9 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
             	result=bestSol;
             }
     	}
-    	boolean exit_loop = false;
+
+    	//Adrian Changes Here
+    	boolean exit_loop = true;
     	while(exit_loop)
         {
             boolean regen_tour = false;

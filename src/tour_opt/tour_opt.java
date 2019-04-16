@@ -41,12 +41,25 @@ public class tour_opt{
 
     public static int []match(int [] lin_tour)
     {
-        int [] tour = lin_tour;
+        int [] tour = new int[lin_tour.length];
 
-        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rl11849.tsp")); //alter file name here.
-        ArrayList<Point2D> nearestN;
-        ArrayList<Point2D> result;
+        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rat195.tsp")); //alter file name here.
+        ArrayList<Point2D> nearestN = new ArrayList<>();
+        ArrayList<Point2D> result = new ArrayList<>();
 
+        for(int i = 0;i<lin_tour.length;i++)
+        {
+            System.out.println(lin_tour[i]);
+
+            nearestN.add(cities.get(lin_tour[i]));
+        }
+        //nearestN = Neighbour.nearest(nearestN);
+        //result = TwoOpt.alternate(nearestN);
+        result = TwoOpt.shuffleAll(nearestN);
+
+        for(int i = 0;i<lin_tour.length;i++) {
+            tour[i] = cities.indexOf(result.get(i));
+        }
 
         return tour;
     }
