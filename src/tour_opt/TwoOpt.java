@@ -2,6 +2,8 @@ package tour_opt;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class TwoOpt {
     public static ArrayList<Point2D> alternate(ArrayList<Point2D> cities) {
@@ -43,6 +45,100 @@ public class TwoOpt {
         System.out.println("Total improvements made: " + improve);
         System.out.println("Total iterations made: " + iterations);
         return cities;
+    }
+
+    public static ArrayList<Point2D> randomSwap(ArrayList<Point2D> cities) {
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        Random gen= new Random();
+        int size = cities.size();
+        int i = gen.nextInt(size);
+        int j=0;
+        do{
+            j = gen.nextInt(size);
+        }while(i==j);
+
+        System.out.println("i = "+i+" j = "+j);
+
+        for (int c = 0; c < size; c++) {
+            newTour.add(cities.get(c));
+        }
+
+        Point2D tempCity = newTour.get(i);
+        newTour.set(i,newTour.get(j));
+        newTour.set(j,tempCity);
+
+        return newTour;
+    }
+
+    public static ArrayList<Point2D> randomInsert(ArrayList<Point2D> cities) {
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        Random gen= new Random();
+        boolean swapped = false;
+        int size = cities.size();
+        int i = gen.nextInt(size);
+        int j=0;
+        do{
+            j = gen.nextInt(size);
+        }while(i==j);
+
+        System.out.println("i = "+i+" j = "+j);
+
+        for (int c = 0; c <size; c++) {
+            newTour.add(cities.get(c));
+        }
+
+        Point2D tempCity = newTour.get(i);
+
+        if(i>j)
+        {
+            for(int c=i;c>j;c--)
+            {
+                newTour.set(c,newTour.get(c-1));
+            }
+        }
+        else
+        {
+            for(int c=i;c<j;c++)
+            {
+                newTour.set(c,newTour.get(c+1));
+            }
+        }
+        newTour.set(j,tempCity);
+
+        return newTour;
+    }
+
+    public static ArrayList<Point2D> shuffleAll(ArrayList<Point2D> cities) {
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        int size = cities.size();
+
+        for (int c = 0; c <size; c++) {
+            newTour.add(cities.get(c));
+        }
+
+        Collections.shuffle(newTour);
+
+        return newTour;
+    }
+
+    public static ArrayList<Point2D> shuffleRange(ArrayList<Point2D> cities) {
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        int size = cities.size();
+        Random gen= new Random();
+        int i = gen.nextInt(size);
+        int j=0;
+        do{
+            j = gen.nextInt(size);
+        }while(i>=j);
+
+
+        for (int c = 0; c <size; c++) {
+            newTour.add(cities.get(c));
+        }
+        System.out.println("i = "+i+" j = "+j);
+        Collections.shuffle(newTour.subList(i,j));
+
+        return newTour;
     }
 
     private static ArrayList<Point2D> swap(ArrayList<Point2D> cities, int i, int j) {
