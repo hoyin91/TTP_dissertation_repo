@@ -825,12 +825,14 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 //            }
 //        return result;
 //    }
-    
+
+	//ADRIAN LINKERN
     public static int[] linkernTour(String tourFileName, int numNodes) {
     	//System.out.println("CALLED LINKERN FUNCT");
         int[] result = new int[numNodes];
         
         boolean debugPrint = false;
+        boolean debug_time = false;
         File tourFile = new File(tourFileName);
         String temp = tourFile.getPath();
         int index = temp.indexOf("_");
@@ -877,7 +879,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 //        	int rc = process.waitFor();
 //        	if (debugPrint) System.out.println("Program terminated!");
 //        	br.close();
-			long starttime = System.currentTimeMillis();
+				long starttime = System.currentTimeMillis();
                 if(System.getProperty("os.name").contains("Windows")){//WINDOWS OS
                     // nop: gets skipped since there are currently problems with linkern.exe and Windows 10
                     // with the following line we do not generated a new one but rely on an existing ttp.tour file on the disk
@@ -899,9 +901,12 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
                     if (debugPrint) System.out.println("Program terminated!");
                     br.close();
                 }
-			    long endtime = System.currentTimeMillis();
-                long totaltime = endtime-starttime;
-                System.out.println("Time taken to produce CLK tour : "+totaltime);
+
+					long endtime = System.currentTimeMillis();
+					long totaltime = endtime - starttime;
+				if(debug_time) {
+					System.out.println("Time taken to produce CLK tour : " + totaltime);
+				}
                 // inserted penalty, which has the effect that one cluster's file system does not cause problems with too many I/O's (UNSUCCESSFUL)
 //                if (tspresultfilename.contains("eil")) {
 //                    try {
@@ -1037,7 +1042,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
     	TTPSolution bestSol = null;
     	double bestObj = Double.NEGATIVE_INFINITY;
         
-        boolean debugPrint = true;
+        boolean debugPrint = !true;
 
         List<Double> objValHist = new ArrayList<Double>();
         List<int[]> tours2 = new ArrayList<int[]>();
@@ -1132,15 +1137,24 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 
     	//Adrian Changes Here
     	boolean exit_loop = true;
+    	int count =0;
     	while(exit_loop)
         {
-            boolean regen_tour = false;
 
             int [] lin_tour = tour_opt.match(tours2.get(0));
 
+			TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
+			instance.evaluate(tempsol, false);
 
+			if (tempsol.objectiveScore > bestObj) {
+				bestSol = tempsol;
+				bestObj = tempsol.objectiveScore;
+			}
 
-            if(regen_tour) {
+			objValHist.add(tempsol.objectiveScore);
+
+			count++;
+			if(count==50) {
                 exit_loop = false;
             }
         }
@@ -1352,6 +1366,10 @@ public static TTPSolution ppGreedyRT3inner(TTPInstance instance, long maxRunTime
 			//add it as long as it doesn't break capacity			
 			if(totalWeight+weights[bestValueIndex]<=instance.capacityOfKnapsack){
 				int ppIndex=(cityTourIndex[bestValueIndex]-1)*itemsPerCity + (int)(bestValueIndex/(tour.length-2));
+				if(ppIndex>=1940||ppIndex<0)
+				{
+					System.out.println(ppIndex);
+				}
 				packingPlan[ppIndex]=1;
 				totalWeight+=weights[bestValueIndex];
 				if(debug) System.out.println("I: "+bestValueIndex+" .. P: "+profits[bestValueIndex]+" .. W: "+weights[bestValueIndex]+" .. C: "+cityTourIndex[bestValueIndex]+"/"+(tour.length-2)+" ... V: "+values[bestValueIndex]);

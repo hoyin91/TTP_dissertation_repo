@@ -8,7 +8,7 @@ public class tour_opt{
     public static void opt_tour() {
 
         double startTime = System.currentTimeMillis();
-        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rl11849.tsp")); //alter file name here.
+        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rat195.tsp")); //alter file name here.
         ArrayList<Point2D> nearestN;
         ArrayList<Point2D> result;
 
@@ -44,18 +44,41 @@ public class tour_opt{
         int [] tour = new int[lin_tour.length];
 
         ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rat195.tsp")); //alter file name here.
+        ArrayList<Point2D> temp = new ArrayList<>();
         ArrayList<Point2D> nearestN = new ArrayList<>();
         ArrayList<Point2D> result = new ArrayList<>();
 
+        double length = 0;
         for(int i = 0;i<lin_tour.length;i++)
         {
-            System.out.println(lin_tour[i]);
+            //System.out.println(lin_tour[i]);
 
-            nearestN.add(cities.get(lin_tour[i]));
+            temp.add(cities.get(lin_tour[i]));
         }
-        //nearestN = Neighbour.nearest(nearestN);
-        //result = TwoOpt.alternate(nearestN);
-        result = TwoOpt.shuffleAll(nearestN);
+        length = Length.routeLength(temp);
+        temp.remove((lin_tour.length-1));
+        if(false) {
+            length = Length.routeLength(temp);
+            System.out.println("original " + length);
+            nearestN = Neighbour.nearest(temp);
+            length = Length.routeLength(nearestN);
+            System.out.println("nearest neighbour " + length);
+            //result = TwoOpt.alternate(nearestN);
+            result = TwoOpt.shuffleAll(nearestN);
+            System.out.println("shuffle " + length);
+            length = Length.routeLength(result);
+        }
+        else
+        {
+            //nearestN = TwoOpt.shuffleAll(temp);
+            //length = Length.routeLength(nearestN);
+            //temp = Neighbour.nearest(nearestN);
+            //length = Length.routeLength(temp);
+            result = TwoOpt.alternate(temp);
+            length = Length.routeLength(result);
+        }
+        result.add(temp.get(0));
+        length = Length.routeLength(result);
 
         for(int i = 0;i<lin_tour.length;i++) {
             tour[i] = cities.indexOf(result.get(i));
