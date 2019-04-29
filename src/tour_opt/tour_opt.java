@@ -78,10 +78,12 @@ public class tour_opt{
             //length = Length.routeLength(temp);
             //shuffleT=TwoOpt.shuffleAll(temp);
             shuffleT = TwoOpt.shuffleRange(temp);
+            //shuffleT = TwoOpt.SwapNeighbor(temp);
             //shuffleT = TwoOpt.shuffleRange(shuffleT);
             //shuffleT=TwoOpt.randomSwap(shuffleT);
+            //shuffleT = TwoOpt.alternate(shuffleT);
             shuffleT = TwoOpt.alternate(shuffleT);
-            shuffleT = TwoOpt.alternate(shuffleT);
+            shuffleT = TwoOpt.SwapNeighbor(shuffleT);
             result=TwoOpt.alternate(shuffleT);
             //result=TwoOpt.alternate(temp);
             //length = Length.routeLength(result);
