@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ttp" default="compile.module.ttp">
+  <dirname property="module.ttp.basedir" file="${ant.file.module_ttp}"/>
+  
+  <property name="module.jdk.home.ttp" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.ttp" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.ttp" value="jdk.classpath.1.8"/>
+  
+  <property name="compiler.args.ttp" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="ttp.output.dir" value="${module.ttp.basedir}/bin"/>
+  <property name="ttp.testoutput.dir" value="${module.ttp.basedir}/bin"/>
+  
+  <path id="ttp.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ttp.module.production.classpath">
+    <path refid="${module.jdk.classpath.ttp}"/>
+  </path>
+  
+  <path id="ttp.runtime.production.module.classpath">
+    <pathelement location="${ttp.output.dir}"/>
+  </path>
+  
+  <path id="ttp.module.classpath">
+    <pathelement location="${ttp.output.dir}"/>
+    <path refid="${module.jdk.classpath.ttp}"/>
+  </path>
+  
+  <path id="ttp.runtime.module.classpath">
+    <pathelement location="${ttp.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ttp">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ttp">
+    <patternset refid="excluded.from.module.ttp"/>
+  </patternset>
+  
+  <path id="ttp.module.sourcepath">
+    <dirset dir="${module.ttp.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ttp" depends="compile.module.ttp.production,compile.module.ttp.tests" description="Compile module TTP"/>
+  
+  <target name="compile.module.ttp.production" depends="register.custom.compilers" description="Compile module TTP; production classes">
+    <mkdir dir="${ttp.output.dir}"/>
+    <javac2 destdir="${ttp.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ttp}/javac">
+      <compilerarg line="${compiler.args.ttp}"/>
+      <bootclasspath refid="ttp.module.bootclasspath"/>
+      <classpath refid="ttp.module.production.classpath"/>
+      <src refid="ttp.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ttp"/>
+    </javac2>
+    
+    <copy todir="${ttp.output.dir}">
+      <fileset dir="${module.ttp.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ttp.tests" depends="register.custom.compilers,compile.module.ttp.production" description="compile module TTP; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ttp" description="cleanup module">
+    <delete dir="${ttp.output.dir}"/>
+    <delete dir="${ttp.testoutput.dir}"/>
+  </target>
+</project>

@@ -39,7 +39,7 @@ public class Driver {
 
         boolean run_once = true;
         String myfile = null;
-        if(!run_once) {
+        if(run_once) {
             System.out.println("Enter TTP instance file:");
             Scanner scan = new Scanner(System.in);
             myfile =scan.nextLine();
@@ -73,7 +73,7 @@ public class Driver {
         	//args = new String[]{"instances70", "",
             //"20", "10000", (600*1000)+""};//10mins, algorithm number 24 is algorithm S5 (best performing) from the GECCO 2015 article          last number: seed
         	//"8", "5", "60000"};//1min
-        if(!run_once) {
+        if(run_once) {
             int heuristic = 20;
             if (args.length == 0)
                 args = new String[]{"instances", myfile, "", "10000", (600 * 1000) + ""};

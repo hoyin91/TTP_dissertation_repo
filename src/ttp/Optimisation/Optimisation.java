@@ -832,7 +832,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
         int[] result = new int[numNodes];
         
         boolean debugPrint = false;
-        boolean debug_time = true;
+        boolean debug_time = !true;
         File tourFile = new File(tourFileName);
         String temp = tourFile.getPath();
         int index = temp.indexOf("_");
@@ -1136,7 +1136,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
     	}
 
     	//Adrian Changes Here
-    	boolean exit_loop = true;
+    	boolean exit_loop = !true;
     	int count =0;
     	while(exit_loop)
         {
