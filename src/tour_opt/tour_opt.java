@@ -43,9 +43,10 @@ public class tour_opt{
     {
         int [] tour = new int[lin_tour.length];
 
-        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rat195.tsp")); //alter file name here.
+        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("pcb3038.tsp")); //alter file name here.
         ArrayList<Point2D> temp = new ArrayList<>();
         ArrayList<Point2D> nearestN = new ArrayList<>();
+        ArrayList<Point2D> shuffleT = new ArrayList<>();
         ArrayList<Point2D> result = new ArrayList<>();
 
         double length = 0;
@@ -55,7 +56,8 @@ public class tour_opt{
 
             temp.add(cities.get(lin_tour[i]));
         }
-        length = Length.routeLength(temp);
+        //length = Length.routeLength(temp);
+        //System.out.println("length before :"+length);
         temp.remove((lin_tour.length-1));
         if(false) {
             length = Length.routeLength(temp);
@@ -74,11 +76,21 @@ public class tour_opt{
             //length = Length.routeLength(nearestN);
             //temp = Neighbour.nearest(nearestN);
             //length = Length.routeLength(temp);
-            result = TwoOpt.alternate(temp);
-            length = Length.routeLength(result);
+            //shuffleT=TwoOpt.shuffleAll(temp);
+            shuffleT = TwoOpt.shuffleRange(temp);
+            //shuffleT = TwoOpt.shuffleRange(shuffleT);
+            //shuffleT=TwoOpt.randomSwap(shuffleT);
+            shuffleT = TwoOpt.alternate(shuffleT);
+            shuffleT = TwoOpt.alternate(shuffleT);
+            result=TwoOpt.alternate(shuffleT);
+            //result=TwoOpt.alternate(temp);
+            //length = Length.routeLength(result);
+
+
         }
         result.add(temp.get(0));
         length = Length.routeLength(result);
+        //System.out.println("length after :"+length);
 
         for(int i = 0;i<lin_tour.length;i++) {
             tour[i] = cities.indexOf(result.get(i));

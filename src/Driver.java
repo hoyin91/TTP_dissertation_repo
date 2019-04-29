@@ -89,8 +89,10 @@ public class Driver {
         else {
             //tour_opt.opt_tour();
             if (args.length == 0)
-                args = new String[]{"instances", "rat195_n1940_uncorr_03.ttp", "20", "10000", (600 * 1000) + ""};
-            doBatch(args);
+                args = new String[]{"instances", "pcb3038_n30370_uncorr_01.ttp", "20", "10000", (600 * 1000) + ""};
+            for (int j = 0; j < 20; j++) {
+                doBatch(args);
+            }
         }
 
         //tour_opt.opt_tour();

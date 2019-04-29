@@ -41,9 +41,9 @@ public class TwoOpt {
             }
             iterations++;
         }
-        System.out.println("Total comparisons made: " + comparisons);
-        System.out.println("Total improvements made: " + improve);
-        System.out.println("Total iterations made: " + iterations);
+        //System.out.println("Total comparisons made: " + comparisons);
+        //System.out.println("Total improvements made: " + improve);
+        //System.out.println("Total iterations made: " + iterations);
         return cities;
     }
 
@@ -57,7 +57,7 @@ public class TwoOpt {
             j = gen.nextInt(size);
         }while(i==j);
 
-        System.out.println("i = "+i+" j = "+j);
+        //System.out.println("i = "+i+" j = "+j);
 
         for (int c = 0; c < size; c++) {
             newTour.add(cities.get(c));
@@ -125,10 +125,10 @@ public class TwoOpt {
         ArrayList<Point2D> newTour = new ArrayList<>();
         int size = cities.size();
         Random gen= new Random();
-        int i = gen.nextInt(size);
+        int i = gen.nextInt(size-1)+1;
         int j=0;
         do{
-            j = gen.nextInt(size);
+            j = gen.nextInt(size-1)+1;
         }while(i>=j);
 
 
