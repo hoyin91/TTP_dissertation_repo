@@ -1167,7 +1167,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 
         Random gen = new Random();
         boolean adrian_test = true;
-        boolean a_debugPrint = !false;
+        boolean a_debugPrint = !true;
         int [] CLK_tour = tours2.get(0);
         while(adrian_test)
 		{
@@ -1193,7 +1193,9 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 
 			count++;
 			if(count==100) {
-				System.out.println("unable to obtain improved results");
+				if(a_debugPrint) {
+					System.out.println("unable to obtain improved results");
+				}
 				adrian_test = false;
 			}
 

@@ -52,7 +52,7 @@ public class TwoOpt {
         boolean debug_print = false;
         Random gen= new Random();
         int size = cities.size();
-        int i = gen.nextInt(size);
+        int i = 1+gen.nextInt(size-2);
 
         if(debug_print) {
             System.out.println("i = " + i);
