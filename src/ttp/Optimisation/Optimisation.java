@@ -1165,6 +1165,40 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
             }
         }
 
+        Random gen = new Random();
+        boolean adrian_test = true;
+        boolean a_debugPrint = !false;
+        int [] CLK_tour = tours2.get(0);
+        while(adrian_test)
+		{
+			int llh_idx = 1+gen.nextInt(6);
+			int[] lin_tour = tour_opt.apply_llh(CLK_tour,llh_idx,instance.file.getPath());
+
+			TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
+			//TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
+			instance.evaluate(tempsol, false);
+
+			if(a_debugPrint){
+				System.out.println("tempsol obj score : "+tempsol.objectiveScore + " best obj score : "+bestObj);
+			}
+			if (tempsol.objectiveScore > bestObj) {
+				System.out.println("Obtained better results");
+				CLK_tour=lin_tour;
+				result = tempsol;
+				bestObj = tempsol.objectiveScore;
+				count = 0;
+			}
+
+			objValHist.add(tempsol.objectiveScore);
+
+			count++;
+			if(count==100) {
+				System.out.println("unable to obtain improved results");
+				adrian_test = false;
+			}
+
+		}
+
     	if (debugPrint) System.out.println("------------------------------------------------");
     	for(int c = 0; c<heuristics.length; c++){
     		if (debugPrint) System.out.println("HEUR: "+heuristics[c]+"\t AVG: "+avgs[c]+"\t STD: "+stds[c]);

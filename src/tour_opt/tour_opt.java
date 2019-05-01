@@ -48,7 +48,7 @@ public class tour_opt{
     {
         int [] tour = new int[lin_tour.length];
 
-        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("pcb3038.tsp")); //alter file name here.
+        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib("rat195.tsp")); //alter file name here.
         ArrayList<Point2D> temp = new ArrayList<>();
         ArrayList<Point2D> nearestN = new ArrayList<>();
         ArrayList<Point2D> shuffleT = new ArrayList<>();
@@ -82,14 +82,14 @@ public class tour_opt{
             //temp = Neighbour.nearest(nearestN);
             //length = Length.routeLength(temp);
             //shuffleT=TwoOpt.shuffleAll(temp);
-            shuffleT = TwoOpt.shuffleRange(temp);
+            //shuffleT = TwoOpt.shuffleRange(temp);
             //shuffleT = TwoOpt.SwapNeighbor(temp);
             //shuffleT = TwoOpt.shuffleRange(shuffleT);
             //shuffleT=TwoOpt.randomSwap(shuffleT);
             //shuffleT = TwoOpt.alternate(shuffleT);
-            shuffleT = TwoOpt.alternate(shuffleT);
-            shuffleT = TwoOpt.SwapNeighbor(shuffleT);
-            result=TwoOpt.alternate(shuffleT);
+            //shuffleT = TwoOpt.alternate(shuffleT);
+            //shuffleT = TwoOpt.SwapNeighbor(shuffleT);
+            result=TwoOpt.alternate(temp);
             //result=TwoOpt.alternate(temp);
             //length = Length.routeLength(result);
 
@@ -98,6 +98,58 @@ public class tour_opt{
         result.add(temp.get(0));
         length = Length.routeLength(result);
         //System.out.println("length after :"+length);
+
+        for(int i = 0;i<lin_tour.length;i++) {
+            tour[i] = cities.indexOf(result.get(i));
+        }
+
+        return tour;
+    }
+
+    public static int []apply_llh(int [] lin_tour,int llh_idx,String file)
+    {
+
+        int [] tour = new int[lin_tour.length];
+        int index = file.indexOf("_");
+        String filename=file.substring(0,index)+".tsp";
+
+        ArrayList<Point2D> cities = new ArrayList<>(Load.loadTSPLib(filename)); //alter file name here.
+        ArrayList<Point2D> temp = new ArrayList<>();
+        ArrayList<Point2D> result = new ArrayList<>();
+
+        for(int i = 0;i<lin_tour.length;i++)
+        {
+            //System.out.println(lin_tour[i]);
+            temp.add(cities.get(lin_tour[i]));
+        }
+
+        temp.remove((lin_tour.length-1));
+
+        switch(llh_idx) {
+            case 1:
+                result = TwoOpt.invertRange(temp);
+                break;
+            case 2:
+                result = TwoOpt.insertRange(temp);
+                break;
+            case 3:
+                result = TwoOpt.randomInsert(temp);
+                break;
+            case 4:
+                result = TwoOpt.randomSwap(temp);
+                break;
+            case 5:
+                result = TwoOpt.SwapNeighbor(temp);
+                break;
+            case 6:
+                result = TwoOpt.swapSequence(temp);
+                break;
+            default:
+                System.out.println("Error wrong idx used :" + llh_idx);
+                break;
+        }
+
+        result.add(temp.get(0));
 
         for(int i = 0;i<lin_tour.length;i++) {
             tour[i] = cities.indexOf(result.get(i));

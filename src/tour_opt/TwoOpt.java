@@ -75,10 +75,10 @@ public class TwoOpt {
         ArrayList<Point2D> newTour = new ArrayList<>();
         Random gen= new Random();
         int size = cities.size();
-        int i = gen.nextInt(size);
+        int i = 1+gen.nextInt(size-1);
         int j=0;
         do{
-            j = gen.nextInt(size);
+            j = 1+gen.nextInt(size-1);
         }while(i==j);
 
         if(debug_print) {
@@ -97,17 +97,20 @@ public class TwoOpt {
     }
 
     public static ArrayList<Point2D> randomInsert(ArrayList<Point2D> cities) {
+        boolean debug_print = false;
         ArrayList<Point2D> newTour = new ArrayList<>();
         Random gen= new Random();
         boolean swapped = false;
         int size = cities.size();
-        int i = gen.nextInt(size);
+        int i = 1+gen.nextInt(size-1);
         int j=0;
         do{
-            j = gen.nextInt(size);
+            j = 1+gen.nextInt(size-1);
         }while(i==j);
 
-        System.out.println("i = "+i+" j = "+j);
+        if(debug_print) {
+            System.out.println("i = " + i + " j = " + j);
+        }
 
         for (int c = 0; c <size; c++) {
             newTour.add(cities.get(c));
@@ -135,14 +138,15 @@ public class TwoOpt {
     }
 
     public static ArrayList<Point2D> invertRange(ArrayList<Point2D> cities) {
+        boolean debug_print=false;
         ArrayList<Point2D> newTour = new ArrayList<>();
         Random gen= new Random();
         int size = cities.size();
         int i = 0;
         int j =0;
-        int range = size/10;
+        int range = size/100;
         do{
-            i = gen.nextInt(size);
+            i = 1+gen.nextInt(size-range-1);
             j = i + gen.nextInt(range);
         }while((j >= size) && (j==i));
 
@@ -153,7 +157,9 @@ public class TwoOpt {
             j=i;
             i=temp;
         }
-        System.out.println("i = "+i+" j = "+j);
+        if(debug_print) {
+            System.out.println("i = " + i + " j = " + j);
+        }
 
         for (int c = 0; c <size; c++) {
             newTour.add(cities.get(c));
@@ -169,10 +175,10 @@ public class TwoOpt {
         ArrayList<Point2D> newTour = new ArrayList<>();
         Random gen= new Random();
         int size = cities.size();
-        int range = size/10;
+        int range = size/100;
         int k = gen.nextInt((range));
-        int i = gen.nextInt(size-k);
-        int j= gen.nextInt(size-k);;
+        int i = 1+gen.nextInt(size-k-1);
+        int j= 1+gen.nextInt(size-k-1);;
         do{
             if(i>j)
             {
@@ -219,10 +225,10 @@ public class TwoOpt {
         int size = cities.size();
         int i = 0;
         int j=0;
-        int range = size/10;
+        int range = size/100;
         int k = gen.nextInt(range);;
-        i = gen.nextInt(size-k);
-        j = gen.nextInt(size-k);
+        i = 1+gen.nextInt(size-k-1);
+        j = 1+gen.nextInt(size-k-1);
         do{
             if(i>j)
             {
@@ -232,7 +238,7 @@ public class TwoOpt {
             }
             if(i+k>j)
             {
-                i = gen.nextInt(size-k);
+                i = 1+ gen.nextInt(size-k-1);
             }
 
         }while(i+k>j);
