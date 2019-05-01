@@ -37,7 +37,8 @@ public class Driver {
      */
     public static void main(String[] args) {
 
-        boolean run_once = true;
+        boolean run_once = !true;
+        boolean debug_llh = true;
         String myfile = null;
         if(run_once) {
             System.out.println("Enter TTP instance file:");
@@ -85,6 +86,10 @@ public class Driver {
                 }
                 heuristic++;
             }
+        }
+        else if(debug_llh)
+        {
+            tour_opt.opt_tour();
         }
         else {
             //tour_opt.opt_tour();

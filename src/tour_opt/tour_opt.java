@@ -13,7 +13,7 @@ public class tour_opt{
         ArrayList<Point2D> result;
 
         double length = Length.routeLength(cities);
-        System.out.println("Initial tour length is: " + length);
+        /*System.out.println("Initial tour length is: " + length);
         double time = System.currentTimeMillis() - startTime;
         System.out.println("Time taken to initialize is: " + time);
         System.out.println("Generating Nearest Neighbour Solution...");
@@ -35,7 +35,12 @@ public class tour_opt{
         time = System.currentTimeMillis() - startTime;
         System.out.println("Time taken for 2 opt optimisation: " + time);
 
-        System.out.println("Resulting tour node count: " + result.size());
+        System.out.println("Resulting tour node count: " + result.size());*/
+        //result = TwoOpt.swapSequence(cities);
+        //result = TwoOpt.insertRange((cities));
+        result = TwoOpt.insertRange(cities);
+        //result = TwoOpt.invertRange(cities);
+        length = Length.routeLength(result);
 
     }
 

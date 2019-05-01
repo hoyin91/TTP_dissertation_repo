@@ -134,6 +134,139 @@ public class TwoOpt {
         return newTour;
     }
 
+    public static ArrayList<Point2D> invertRange(ArrayList<Point2D> cities) {
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        Random gen= new Random();
+        int size = cities.size();
+        int i = 0;
+        int j =0;
+        int range = size/10;
+        do{
+            i = gen.nextInt(size);
+            j = i + gen.nextInt(range);
+        }while((j >= size) && (j==i));
+
+
+        if(i>j)
+        {
+            int temp =j;
+            j=i;
+            i=temp;
+        }
+        System.out.println("i = "+i+" j = "+j);
+
+        for (int c = 0; c <size; c++) {
+            newTour.add(cities.get(c));
+        }
+
+        Collections.reverse(newTour.subList(i,j));
+
+        return newTour;
+    }
+
+    public static ArrayList<Point2D> insertRange(ArrayList<Point2D> cities) {
+        boolean debug_print = false;
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        Random gen= new Random();
+        int size = cities.size();
+        int range = size/10;
+        int k = gen.nextInt((range));
+        int i = gen.nextInt(size-k);
+        int j= gen.nextInt(size-k);;
+        do{
+            if(i>j)
+            {
+                int temp = j;
+                j = i;
+                i = temp;
+            }
+            if(i+k>j)
+            {
+                i = gen.nextInt(size-k);
+            }
+        }while(i+k>j);
+
+        if(debug_print) {
+            System.out.println("i = " + i + " j = " + j);
+        }
+
+        for (int c = 0; c <i; c++) {
+                newTour.add(cities.get(c));
+        }
+
+        for(int c = i+k;c<j;c++)
+        {
+            newTour.add(cities.get(c));
+        }
+
+        for(int c = i;c<i+k;c++)
+        {
+            newTour.add(cities.get(c));
+        }
+
+        for(int c = j;c<size;c++)
+        {
+            newTour.add(cities.get(c));
+        }
+
+        return newTour;
+    }
+
+    public static ArrayList<Point2D> swapSequence(ArrayList<Point2D> cities) {
+        boolean debug_print = false;
+        ArrayList<Point2D> newTour = new ArrayList<>();
+        Random gen= new Random();
+        int size = cities.size();
+        int i = 0;
+        int j=0;
+        int range = size/10;
+        int k = gen.nextInt(range);;
+        i = gen.nextInt(size-k);
+        j = gen.nextInt(size-k);
+        do{
+            if(i>j)
+            {
+                int temp = j;
+                j = i;
+                i = temp;
+            }
+            if(i+k>j)
+            {
+                i = gen.nextInt(size-k);
+            }
+
+        }while(i+k>j);
+
+        if(debug_print) {
+            System.out.println("i = " + i + " j = " + j);
+        }
+
+        for (int c = 0; c <i; c++) {
+                newTour.add(cities.get(c));
+        }
+
+        for(int c = j; c<j+k;c++){
+            newTour.add(cities.get(c));
+        }
+
+        for(int c = (i+k);c<j;c++)
+        {
+            newTour.add(cities.get(c));
+        }
+
+        for(int c = i;c<i+k;c++)
+        {
+            newTour.add(cities.get(c));
+        }
+
+        for(int c=j+k;c<size;c++)
+        {
+            newTour.add(cities.get(c));
+        }
+
+        return newTour;
+    }
+
     public static ArrayList<Point2D> shuffleAll(ArrayList<Point2D> cities) {
         ArrayList<Point2D> newTour = new ArrayList<>();
         int size = cities.size();
@@ -171,6 +304,7 @@ public class TwoOpt {
 
         return newTour;
     }
+
 
     private static ArrayList<Point2D> swap(ArrayList<Point2D> cities, int i, int j) {
         //conducts a 2 opt swap by inverting the order of the points between i and j
