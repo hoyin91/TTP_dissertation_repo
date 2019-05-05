@@ -1182,7 +1182,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 				System.out.println("tempsol obj score : "+tempsol.objectiveScore + " best obj score : "+bestObj);
 			}
 			if (tempsol.objectiveScore > bestObj) {
-				System.out.println("Obtained better results");
+				//System.out.println("Obtained better results");
 				CLK_tour=lin_tour;
 				result = tempsol;
 				bestObj = tempsol.objectiveScore;

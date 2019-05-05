@@ -39,11 +39,18 @@ public class Driver {
 
         boolean run_once = !true;
         boolean debug_llh = !true;
-        String myfile = null;
+
         //if(run_once) {
-            System.out.println("Enter TTP instance file:");
+
             Scanner scan = new Scanner(System.in);
-            myfile =scan.nextLine();
+            System.out.println("enter number of instance to run");
+            String instance_no = scan.nextLine();
+            String [] myfile =  new String[Integer.parseInt(instance_no)];
+            for(int i =0;i<Integer.parseInt(instance_no);i++) {
+                System.out.println("Enter TTP instance file:");
+                myfile[i] = scan.nextLine();
+            }
+
         //}
         //if (args.length==0)
 //        	args = new String[]{"instances", "a280_n1395_bounded-strongly-corr_01",
@@ -77,7 +84,7 @@ public class Driver {
         if(run_once) {
             int heuristic = 20;
             if (args.length == 0)
-                args = new String[]{"instances", myfile, "", "10000", (600 * 1000) + ""};
+                args = new String[]{"instances", myfile[0], "", "10000", (600 * 1000) + ""};
             for (int i = 0; i < 11; i++) {
                 System.out.println("RESULTS FOR heuristics : " + heuristic);
                 args[2] = Integer.toString(heuristic);
@@ -94,9 +101,17 @@ public class Driver {
         else {
             //tour_opt.opt_tour();
             if (args.length == 0)
-                args = new String[]{"instances", myfile, "24", "10000", (600 * 1000) + ""};
-            for (int j = 0; j < 30; j++) {
-                doBatch(args);
+                args = new String[]{"instances", "", "24", "10000", (600 * 1000) + ""};
+            for(int i=0;i<Integer.parseInt(instance_no);i++) {
+                args[1]=myfile[i];
+                args[2]="20";
+                for (int j = 0; j < 30; j++) {
+                    doBatch(args);
+                }
+                args[3]="24";
+                for (int j = 0; j < 30; j++) {
+                    doBatch(args);
+                }
             }
         }
 
