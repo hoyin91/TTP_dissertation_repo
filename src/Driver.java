@@ -103,12 +103,15 @@ public class Driver {
             if (args.length == 0)
                 args = new String[]{"instances", "", "24", "10000", (600 * 1000) + ""};
             for(int i=0;i<Integer.parseInt(instance_no);i++) {
+                System.out.println("Instance :" + myfile[i]);
                 args[1]=myfile[i];
                 args[2]="20";
+                System.out.println("RESULTS FOR heuristics : " + args[2]);
                 for (int j = 0; j < 30; j++) {
                     doBatch(args);
                 }
-                args[3]="24";
+                System.out.println("RESULTS FOR heuristics : " + args[2]);
+                args[2]="24";
                 for (int j = 0; j < 30; j++) {
                     doBatch(args);
                 }
