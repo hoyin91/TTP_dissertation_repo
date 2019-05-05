@@ -832,7 +832,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
         int[] result = new int[numNodes];
         
         boolean debugPrint = false;
-        boolean debug_time = false;
+        boolean debug_time = !true;
         File tourFile = new File(tourFileName);
         String temp = tourFile.getPath();
         int index = temp.indexOf("_");
@@ -1136,28 +1136,71 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
     	}
 
     	//Adrian Changes Here
-    	boolean exit_loop = true;
+    	boolean exit_loop = !true;
     	int count =0;
     	while(exit_loop)
         {
 
-            int [] lin_tour = tour_opt.match(tours2.get(0));
+
+        	int[] lin_tour = tour_opt.match(tours2.get(0));
+
 
 			TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
 			instance.evaluate(tempsol, false);
 
+
+			System.out.println("tempsol obj score : "+tempsol.objectiveScore + " best obj score : "+bestObj);
 			if (tempsol.objectiveScore > bestObj) {
 				bestSol = tempsol;
 				bestObj = tempsol.objectiveScore;
+				exit_loop = false;
 			}
 
 			objValHist.add(tempsol.objectiveScore);
 
 			count++;
-			if(count==50) {
+			if(count==50000 ) {
+				System.out.println("unable to obtain improved results");
                 exit_loop = false;
             }
         }
+
+        Random gen = new Random();
+        boolean adrian_test = true;
+        boolean a_debugPrint = !true;
+        int [] CLK_tour = tours2.get(0);
+        while(adrian_test)
+		{
+			int llh_idx = 1+gen.nextInt(6);
+			int[] lin_tour = tour_opt.apply_llh(CLK_tour,llh_idx,instance.file.getPath());
+
+			TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
+			//TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
+			instance.evaluate(tempsol, false);
+
+			if(a_debugPrint){
+				System.out.println("tempsol obj score : "+tempsol.objectiveScore + " best obj score : "+bestObj);
+			}
+			if (tempsol.objectiveScore > bestObj) {
+				//System.out.println("Obtained better results");
+				CLK_tour=lin_tour;
+				result = tempsol;
+				bestObj = tempsol.objectiveScore;
+				count = 0;
+			}
+
+			objValHist.add(tempsol.objectiveScore);
+
+			count++;
+			if(count==100) {
+				if(a_debugPrint) {
+					System.out.println("unable to obtain improved results");
+				}
+				adrian_test = false;
+			}
+
+		}
+
     	if (debugPrint) System.out.println("------------------------------------------------");
     	for(int c = 0; c<heuristics.length; c++){
     		if (debugPrint) System.out.println("HEUR: "+heuristics[c]+"\t AVG: "+avgs[c]+"\t STD: "+stds[c]);
@@ -1366,10 +1409,6 @@ public static TTPSolution ppGreedyRT3inner(TTPInstance instance, long maxRunTime
 			//add it as long as it doesn't break capacity			
 			if(totalWeight+weights[bestValueIndex]<=instance.capacityOfKnapsack){
 				int ppIndex=(cityTourIndex[bestValueIndex]-1)*itemsPerCity + (int)(bestValueIndex/(tour.length-2));
-				if(ppIndex>=1940||ppIndex<0)
-				{
-					System.out.println(ppIndex);
-				}
 				packingPlan[ppIndex]=1;
 				totalWeight+=weights[bestValueIndex];
 				if(debug) System.out.println("I: "+bestValueIndex+" .. P: "+profits[bestValueIndex]+" .. W: "+weights[bestValueIndex]+" .. C: "+cityTourIndex[bestValueIndex]+"/"+(tour.length-2)+" ... V: "+values[bestValueIndex]);
