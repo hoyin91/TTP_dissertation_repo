@@ -110,8 +110,8 @@ public class Driver {
                 for (int j = 0; j < 30; j++) {
                     doBatch(args);
                 }
-                System.out.println("RESULTS FOR heuristics : " + args[2]);
                 args[2]="24";
+                System.out.println("RESULTS FOR heuristics : " + args[2]);
                 for (int j = 0; j < 30; j++) {
                     doBatch(args);
                 }
