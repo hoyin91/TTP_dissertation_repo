@@ -1,0 +1,37 @@
+enter number of instance to run
+Enter TTP instance file:
+Enter TTP instance file:
+Enter TTP instance file:
+Instance :rat783_n2346_uncorr_01.ttp
+RESULTS FOR heuristics : 20
+rat783_n2346_uncorr_01.ttp: 6552.0 99913.0 343697.0 9267 13362.554957322633 108382.40720154846 14395
+rat783_n2346_uncorr_01.ttp: 6905.0 99560.0 340843.0 9255 13357.142639511123 105623.71811820913 13141
+rat783_n2346_uncorr_01.ttp: 4514.0 101951.0 333352.0 9263 12992.033243432374 104562.29458315592 19810
+rat783_n2346_uncorr_01.ttp: 3788.0 102677.0 338829.0 9249 13161.323486049985 107058.09341065976 20733
+rat783_n2346_uncorr_01.ttp: 7141.0 99324.0 340152.0 9271 13427.342385774205 103696.50058651625 13462
+rat783_n2346_uncorr_01.ttp: 7618.0 98847.0 342487.0 9258 13301.771727663143 108242.79987585207 13204
+rat783_n2346_uncorr_01.ttp: 2768.0 103697.0 336003.0 9287 13055.217592858795 106100.61818975664 13703
+rat783_n2346_uncorr_01.ttp: 6936.0 99529.0 343665.0 9256 13326.01271435495 108993.91610020932 12820
+rat783_n2346_uncorr_01.ttp: 6363.0 100102.0 339030.0 9251 13230.029226728242 106049.18531731566 13688
+rat783_n2346_uncorr_01.ttp: 6869.0 99596.0 344306.0 9275 13440.687716599414 107615.48931068432 13796
+rat783_n2346_uncorr_01.ttp: 6376.0 100089.0 339087.0 9249 13230.41768845412 106099.34450632296 12677
+rat783_n2346_uncorr_01.ttp: ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
+ERROR: The last city must be the same as the first city
