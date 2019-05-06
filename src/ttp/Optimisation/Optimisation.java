@@ -1169,6 +1169,8 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
         boolean adrian_test = true;
         boolean a_debugPrint = !true;
         int [] CLK_tour = tours2.get(0);
+		long starttime = System.currentTimeMillis();
+		long currenttime = starttime;
         while(adrian_test)
 		{
 			int llh_idx = 1+gen.nextInt(6);
@@ -1198,6 +1200,15 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 				}
 				adrian_test = false;
 			}
+			currenttime = System.currentTimeMillis();
+			if(currenttime>(startTime+(60*1000)))
+			{
+				if(a_debugPrint) {
+					System.out.println("exceeded time");
+				}
+				adrian_test = false;
+			}
+
 
 		}
 
