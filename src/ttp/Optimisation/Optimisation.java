@@ -1174,8 +1174,10 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
         while(adrian_test)
 		{
 			int llh_idx = 1+gen.nextInt(6);
-			int[] lin_tour = tour_opt.apply_llh(CLK_tour,llh_idx,instance.file.getPath());
+			//int[] lin_tour = tour_opt.apply_llh(CLK_tour,llh_idx,instance.file.getPath());
 
+			int[] lin_tour = tour_opt.apply_llh2(CLK_tour,llh_idx);
+			//System.out.println("llx : " + llh_idx);
 			TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
 			//TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
 			instance.evaluate(tempsol, false);

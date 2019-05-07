@@ -44,6 +44,25 @@ public class tour_opt{
 
     }
 
+    public static void opt_tour2() {
+
+    int [] tour = new int[100];
+
+    for(int i=0;i<100;i++)
+    {
+        tour[i]=i;
+    }
+
+    tour = TwoOpt.randomInsert_array(tour);
+
+    for(int i=0;i<100;i++)
+    {
+        System.out.println(tour[i]);
+    }
+
+
+    }
+
     public static int []match(int [] lin_tour)
     {
         int [] tour = new int[lin_tour.length];
@@ -153,6 +172,38 @@ public class tour_opt{
 
         for(int i = 0;i<lin_tour.length;i++) {
             tour[i] = cities.indexOf(result.get(i));
+        }
+
+        return tour;
+    }
+
+    public static int []apply_llh2(int [] lin_tour,int llh_idx)
+    {
+
+        int [] tour = new int[lin_tour.length];
+
+        switch(llh_idx) {
+            case 1:
+                tour = TwoOpt.invertRange_array(lin_tour);
+                break;
+            case 2:
+                tour = TwoOpt.insertRange_array(lin_tour);
+                break;
+            case 3:
+                tour = TwoOpt.randomInsert_array(lin_tour);
+                break;
+            case 4:
+                tour = TwoOpt.randomSwap_array(lin_tour);
+                break;
+            case 5:
+                tour = TwoOpt.swapNeighbor_array(lin_tour);
+                break;
+            case 6:
+                tour = TwoOpt.swapSequence_array(lin_tour);
+                break;
+            default:
+                System.out.println("Error wrong idx used :" + llh_idx);
+                break;
         }
 
         return tour;

@@ -96,7 +96,7 @@ public class Driver {
         }
         else if(debug_llh)
         {
-            tour_opt.opt_tour();
+            tour_opt.opt_tour2();
         }
         else {
             //tour_opt.opt_tour();
