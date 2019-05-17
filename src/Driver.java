@@ -430,6 +430,7 @@ public class Driver {
             {
                 newSolution.computationTime = System.currentTimeMillis() - startTime;
 //                newSolution.writeResult(resultTitle);
+                newSolution.printFull();
                 newSolution.println();
             }
             

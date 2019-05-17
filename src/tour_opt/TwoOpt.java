@@ -95,7 +95,7 @@ public class TwoOpt {
 
         boolean debug_print = false;
         Random gen= new Random();
-        int size = tour.length;
+        int size = 10;
         int i = 1+gen.nextInt(size-3);
         int j = 0;
         do{
@@ -150,7 +150,7 @@ public class TwoOpt {
         boolean debug_print = false;
         Random gen= new Random();
         int size = tour.length;
-        int range = size/10;
+        int range = 10;
         int j = 0;
         int i = 1+gen.nextInt(size-range-2);
         do{
@@ -181,7 +181,7 @@ public class TwoOpt {
         boolean debug_print = false;
         Random gen= new Random();
         int size = tour.length;
-        int range =1+gen.nextInt(size/10);
+        int range =1+gen.nextInt(10);
         int j = 0;
         int i = 1+gen.nextInt(size-range-2);
 
@@ -230,7 +230,7 @@ public class TwoOpt {
         boolean debug_print = false;
         Random gen= new Random();
         int size = tour.length;
-        int range =1+gen.nextInt(size/10);
+        int range =1+gen.nextInt(10);
         int j = 0;
         int i = 1+gen.nextInt(size-range-2);
 

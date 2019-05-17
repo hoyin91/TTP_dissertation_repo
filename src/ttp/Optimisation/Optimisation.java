@@ -1202,7 +1202,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
 				adrian_test = false;
 			}
 			currenttime = System.currentTimeMillis();
-			if(currenttime>(startTime+(10*1000)))
+			if(currenttime>(startTime+(60*1000)))
 			{
 				if(a_debugPrint) {
 					System.out.println("exceeded time");
