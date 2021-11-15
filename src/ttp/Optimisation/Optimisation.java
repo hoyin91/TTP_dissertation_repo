@@ -1090,9 +1090,8 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
         		//TTPSolution sol = flipTourCheck(instance, linTour);       		
         		//150225 TTPSolution sol = ppGreedyRT2(instance,tours2.get(i),h);
                         TTPSolution sol = ppGreedyRT3(instance, maxRunTime-elapsedTime /*Integer.MAX_VALUE*/, tours2.get(i), 5, 2.5, false);
-                        
-                        
-                        //150201 injected code to measure time of 30 reps
+
+				//150201 injected code to measure time of 30 reps
 //                        long measureStart = System.currentTimeMillis();
 //                        for (int j=0; j<30; j++) {
 //                            TTPSolution soltemp = ppGreedyRT3(instance, Integer.MAX_VALUE, tours2.get(i), 5, 2.5, false);
@@ -1135,6 +1134,7 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
             }
     	}
 
+
     	//Adrian Changes Here
     	boolean exit_loop = !true;
     	int count =0;
@@ -1163,29 +1163,34 @@ public static TTPSolution insertionReverse(TTPInstance instance, int[] tour, int
                 exit_loop = false;
             }
         }
-
+System.out.println("Before HH score = "+bestObj+" current time = "+System.currentTimeMillis());
         Random gen = new Random();
-        boolean adrian_test = true;
+        boolean adrian_test = !true;
         boolean a_debugPrint = !true;
         int [] CLK_tour = tours2.get(0);
 		long starttime = System.currentTimeMillis();
 		long currenttime = starttime;
+		int llh_idx1 = 0;
+
         while(adrian_test)
 		{
 			int llh_idx = 1+gen.nextInt(6);
-			//int[] lin_tour = tour_opt.apply_llh(CLK_tour,llh_idx,instance.file.getPath());
+			//int llh_idx = 1;
 
 			int[] lin_tour = tour_opt.apply_llh2(CLK_tour,llh_idx);
 			//System.out.println("llx : " + llh_idx);
+
 			TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
-			//TTPSolution tempsol = ppGreedyRT3(instance, 5000 /*Integer.MAX_VALUE*/, lin_tour, 5, 2.5, false);
+
 			instance.evaluate(tempsol, false);
 
 			if(a_debugPrint){
 				System.out.println("tempsol obj score : "+tempsol.objectiveScore + " best obj score : "+bestObj);
 			}
 			if (tempsol.objectiveScore > bestObj) {
-				//System.out.println("Obtained better results");
+				System.out.println("Currentime ="+System.currentTimeMillis());
+				System.out.println("Obtained better results");
+				System.out.println("tempsol obj score : "+tempsol.objectiveScore + " best obj score : "+bestObj);
 				CLK_tour=lin_tour;
 				result = tempsol;
 				bestObj = tempsol.objectiveScore;

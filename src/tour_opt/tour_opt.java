@@ -180,26 +180,27 @@ public class tour_opt{
     public static int []apply_llh2(int [] lin_tour,int llh_idx)
     {
 
+        int [] lin1_tour = lin_tour.clone();
         int [] tour = new int[lin_tour.length];
 
         switch(llh_idx) {
             case 1:
-                tour = TwoOpt.invertRange_array(lin_tour);
+                tour = TwoOpt.swapNeighbor_array(lin1_tour);
                 break;
             case 2:
-                tour = TwoOpt.insertRange_array(lin_tour);
+                tour = TwoOpt.insertRange_array(lin1_tour);
                 break;
             case 3:
-                tour = TwoOpt.randomInsert_array(lin_tour);
+                tour = TwoOpt.randomInsert_array(lin1_tour);
                 break;
             case 4:
-                tour = TwoOpt.randomSwap_array(lin_tour);
+                tour = TwoOpt.randomSwap_array(lin1_tour);
                 break;
             case 5:
-                tour = TwoOpt.swapNeighbor_array(lin_tour);
+                tour = TwoOpt.invertRange_array(lin1_tour);
                 break;
             case 6:
-                tour = TwoOpt.swapSequence_array(lin_tour);
+                tour = TwoOpt.swapSequence_array(lin1_tour);
                 break;
             default:
                 System.out.println("Error wrong idx used :" + llh_idx);

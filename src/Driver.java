@@ -39,6 +39,7 @@ public class Driver {
 
         boolean run_once = !true;
         boolean debug_llh = !true;
+        boolean test_results = true;
 
         //if(run_once) {
 
@@ -97,6 +98,17 @@ public class Driver {
         else if(debug_llh)
         {
             tour_opt.opt_tour2();
+        }
+        else if(test_results)
+        {
+            if (args.length == 0)
+                args = new String[]{"instances", "", "24", "10000", (600 * 1000) + ""};
+            args[1]=myfile[0];
+            args[2]="24";
+            for (int j = 0; j < 1; j++) {
+                System.out.println("Starting time is " + System.currentTimeMillis());
+                doBatch(args);
+            }
         }
         else {
             //tour_opt.opt_tour();
